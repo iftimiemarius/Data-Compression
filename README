@@ -1,0 +1,71 @@
+Marius-Valentin Iftimie, 323CD
+
+Data Compression
+
+Analysis of Algorithms - Step 2
+
+Implemented the following types of compression:
+-> LZW Compression
+   -> First five test illustrate how good lzw compression is against
+      repetitive sequences
+-> Huffman Coding
+   -> Output should be in bits, but as the smallest addressable unit of
+      memory is a byte, the output file is 8 times bigger as it should be
+
+Input Tests:
+-> 5 random tests containing 100 duplicated lines
+-> 5 tests generated using the generator containing random words
+-> located in folder in/
+-> each test is named "testID.in", where ID represents the number of the test
+
+Test the correctness of the algorithms:
+-> run the tester for an input
+-> check the difference between the file (in_path) and (out_decompressed)
+
+Usage of tester:
+./tester (in_path) (out_path) (out_decompressed) (compression_type)
+  OR
+make run ARGS="(in_path) (out_path) (out_decompressed) (compression_type)"
+
+   -> in_path represents the path for the input data
+   -> out_path represents the path for the output data
+   -> out_decompressed represents the path for the decompressed output data
+   -> compression_type represents a string that contains the compression type:
+      -> "lzw" - stands for LZW compression
+      -> "huffman" - stands for Huffman Coding
+
+Usage of generator:
+javac TestGenerator.java
+TestGenerator (words) (path)
+rm *.class
+  OR
+make generate_test ARGS="(words) (path)"
+make clean
+   -> words represents the number of words wanted in the file
+   -> path represents the path where the generated file will be located
+
+Source files:
+algo.h -> minimal set of functions that solve the chosen problem
+       -> separated the Huffman Coding and LZW Compression function headers
+       -> compressLZW returns an int vector
+       -> decompressLZW takes an int vector as a parameter
+       -> compressHuffman also takes an TreeNode as a parameter in order to
+                          save the Huffman Tree
+       -> decompressHuffman also takes an TreeNode as a parameter in order to
+                            use the Huffman Tree to decompress the data
+algo.cpp -> implemented the functions for the LZW Compression
+algo2.cpp -> implemented the functions for the Huffman Coding
+Makefile -> contains a set of rules in order to build and run the program
+            and the generator
+in/ -> contains 10 text-based test files
+tester.cpp -> tester to run the algorithms on the wanted tests
+checker.sh -> checker to test the algorithms on the tests
+TestGenerator.java -> generator to create tests using random words from
+                      a text file that contains over 466k English words
+words.txt -> text file that contains English words
+
+References:
+-> https://www.geeksforgeeks.org/lzw-lempel-ziv-welch-compression-technique/
+-> https://www.geeksforgeeks.org/huffman-coding-greedy-algo-3/
+-> https://www.techiedelight.com/huffman-coding/
+-> https://github.com/dwyl/english-words
